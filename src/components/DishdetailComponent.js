@@ -5,8 +5,36 @@ import { Link } from 'react-router-dom';
 
 
 
-function RenderDish({dish, comments}) {
-    const com = comments.map(comment => {
+function RenderDish({ dish }) {
+
+        if (dish != null) {
+            return (
+                <div className="container">
+                <div className="row">
+                <Card>
+                  <CardImg width="100%" src={dish.image} alt={dish.name} />
+                  <CardImgOverlay>
+                        <CardTitle>{dish.name}</CardTitle>
+
+                                </CardImgOverlay>
+                                <CardBody>
+                                <CardText> {dish.description} </CardText>
+                                </CardBody>
+                </Card>
+                    </div>
+                    </div>
+
+            );
+        }
+        if (dish == null) {
+            return (<div></div>)
+        }
+    }
+
+function RenderComments({ comments }) {
+
+        if (comments !=null) {
+            const com = comments.map(comment => {
         return (
             <li key={comment.id}>
                 <p>{comment.comment}</p>
@@ -21,52 +49,35 @@ function RenderDish({dish, comments}) {
             </li>
         );
     });
-
-        if (dish != null && comments !=null) {
             return (
                 <div className="container">
-                    <div className="row">
-                <div className="col-12 col-md-5 m-1">
-                <Card>
-                  <CardImg width="100%" src={dish.image} alt={dish.name} />
-                  <CardImgOverlay>
-                      <CardTitle>{dish.name}</CardTitle>
-                  </CardImgOverlay>
-                </Card>
-                    </div>
-                     <div className='col-12 col-md-5 m-1'>
-                <h4> Comments </h4>
+                <div className="row">
+                    <h4> Comments </h4>
                     <ul className='list-unstyled'>
                     {com}
-                </ul>
-
+                    </ul>
             </div>
                     </div>
-                </div>
             );
         }
-        if (dish == null) {
-            return (<div></div>)
-        }
-        if (comments == null) {
+        else {
             return (<div></div>)
         }
     }
- 
 const DishDetail= (props)=>{
         
     const dish = props.dish
     const comments = props.comments
 
-    const dishItem = <RenderDish dish={dish}
-        comments={comments} />
+    const dishItem = <RenderDish dish={dish} />
+    const commentItem = <RenderComments comments={comments}/>
         
             if (dishItem == null) {
                 return (<div></div>);
             }
 
     return (
-  <div className="container">
+            <div className="container">
                 <div className="row">
                     <Breadcrumb>
                         <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
@@ -78,9 +89,13 @@ const DishDetail= (props)=>{
                     </div>                
                 </div>
 
-
                 <div className='row'>
-                    {dishItem}
+                     <div className='col-12 col-md-5 m-1'>
+                   {dishItem}
+                    </div>
+                    <div className='col-12 col-md-5 m-1'>
+                     {commentItem}
+                </div>
             </div>
             </div>
             )
