@@ -3,6 +3,7 @@ import { Card, CardImg, CardText,CardImgOverlay, CardBody, CardTitle, Breadcrumb
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 // import CommentForm from './CommentFormComponent';
 const required = (val) => val && val.length; 
@@ -157,7 +158,7 @@ function RenderDish({ dish,isLoading,errMess }) {
                 <div className="container">
                 <div className="row">
                 <Card>
-                  <CardImg width="100%" src={dish.image} alt={dish.name} />
+                <CardImg top src={baseUrl + dish.image} alt={dish.name} />
                   <CardImgOverlay>
                         <CardTitle>{dish.name}</CardTitle>
 
