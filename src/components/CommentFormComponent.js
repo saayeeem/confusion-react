@@ -1,7 +1,7 @@
+/* eslint-disable react/jsx-pascal-case */
 
 import React, {Component} from 'react';
-import { Card, CardImg, CardText,CardImgOverlay, CardBody, CardTitle, Breadcrumb, BreadcrumbItem, Modal, ModalHeader, ModalBody, Button, Label, Row, Col } from 'reactstrap' ;
-import { Link } from 'react-router-dom';
+import {Modal, ModalHeader, ModalBody, Button, Label, Row, Col } from 'reactstrap' ;
 import { Control, LocalForm, Errors } from 'react-redux-form';
 
 /* CommentForm Component Start  */
@@ -26,8 +26,7 @@ class CommentForm extends Component {
     }
 
     handleCommentFormSubmit(values) {
-        console.log("Current State is: " + JSON.stringify(values));
-        alert("Current State is: " + JSON.stringify(values));
+        this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
 
 
     }
@@ -86,7 +85,7 @@ class CommentForm extends Component {
                                         placeholder="Your  Name"
                                         className="form-control"
                                         validators={{
-                                            required, minLength: minLength(2), maxLength: maxLength(15)
+                                            required, minLength: minLength(3), maxLength: maxLength(15)
                                         }}
                                     />
                                     <Errors
@@ -95,7 +94,7 @@ class CommentForm extends Component {
                                         show="touched"
                                         messages={{
                                             required: 'Required',
-                                            minLength: 'Must be greater than 2 characters',
+                                            minLength: 'Must be greater than 3 characters',
                                             maxLength: 'Must be 15 characters or less'
                                         }}
                                     />
@@ -135,7 +134,4 @@ class CommentForm extends Component {
         );
     }
 }
-
-
-
 export default CommentForm;
